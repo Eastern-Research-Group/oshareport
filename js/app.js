@@ -230,46 +230,37 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
 	if (government == 'federal') {
 		resultsStyle = "exempt";
 		document.querySelector("#fed-exempt").style.display = "block";
-		console.log(1);
 	} else if (exemptPrivStates.includes(state) && (government == "nongovernment" || government == "statelocal")) {
 		resultsStyle = "possible";
 		document.querySelector('#possible-exempt').style.display = "block";
-		console.log(2);
 	} else if (exemptStates.includes(state)) {
-		console.log(4);
 		if (government == "statelocal") {
 			resultsStyle = "possible";
 			document.querySelector("#possible-exempt").style.display = "block";
-			console.log(5);
 		}
 	} else {
 		if (naicsInfo.RKExempt == "TRUE") {
 			resultsStyle = "exempt";
 			document.querySelector("#rk-exempt").style.display = "block";
 			document.querySelector("#naics__exempt").style.display = "block";
-			console.log(6);
 		} else if (naicsInfo.NotOSHAJurisdiction == "TRUE") {
 			resultsStyle = "exempt";
 			document.querySelector("#naics-exempt").style.display = "block";
 			document.querySelector("#naics__exempt").style.display = "block";
-			console.log(7);
 		}
 		if (naicsInfo.Employees20 == "TRUE" && employment < 20) {
 			resultsStyle = "exempt";
 			document.querySelector("#employment-exempt").style.display = "block";
-			console.log(8);
 		} else if (naicsInfo.Employees250 == "TRUE" && employment < 250) {
 			resultsStyle = "exempt";
 			document.querySelector("#employment-exempt").innerHTML = 
 				document.querySelector("#employment-exempt").innerHTML.replace("20", "250");
 			document.querySelector("#employment-exempt").style.display = "block";
 			document.querySelector("#naics__exempt").style.display = "block";
-			console.log(9);
 		}
 	}
 
 	console.log(`resultsStyle = ${resultsStyle}`);
-	console.log(10);
 
 	let elList = document.querySelectorAll("." + resultsStyle);
 	elList.forEach(el => el.style.display = "block");
@@ -285,8 +276,6 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
 
 	document.querySelector("#data-entry").style.display = "none";		
 	document.querySelector("#results").style.display = "block";
-
-	console.log(11);
 });
 
 
