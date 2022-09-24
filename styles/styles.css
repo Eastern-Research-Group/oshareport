@@ -1,3 +1,16 @@
+.table { 
+  display: table; 
+}
+
+.row { 
+  display: table-row; 
+  padding: 5px 
+}
+.cell { 
+  display: table-cell; 
+  padding: 5px 
+}
+
 * {
   box-sizing: border-box;
 }
@@ -64,4 +77,36 @@
 
 .autocomplete__results > li:focus {
   background: hsl(212, 10%, 70%);
+}
+
+.results {
+  display:  none;
+}
+
+.possible {
+  display:  none;
+}
+
+.exempt {
+  display:  none;
+}
+
+.required {
+  display:  none;
+}
+
+.default {
+  display:  block;
+}
+
+.naics__exempt {
+  display:  none;
+}
+
+.results__list {
+  display:  none;
+}
+
+.results_ul {
+  list-style: circle;
 }

@@ -2,18 +2,12 @@
 <html>
 	<head>
 		<title>OSHA ITA Applicability</title>
-		<style>
-			.table { display: table; }
-			.row { display: table-row; padding: 5px }
-			.cell { display: table-cell; padding: 5px }
-		</style>
         <link href="./styles/styles.css" rel="stylesheet" />
-		<!-- <script type="module" src="./js/naics.js"></script> -->
 		<script type="module" src="./js/app.js"></script>
 	</head>
 	<body>
 		<h2>OSHA ITA Applicability</h2>
-		<div id="content">
+		<div id="data-entry">
 			<form id="form1" name="form1" action="index.html" method="post" autocomplete="off">
 				<div class="table">
 					<div class="row">
@@ -106,7 +100,6 @@
 							<label for="naics">NAICS Code</label>
 						</div>
 						<div class="cell">
-<!-- 							<input id="naics" name="naics" required>-->	
 							<div class="autocomplete__container" role="combobox" aria-labelledby="autocomplete-label">
 				                <input role="textbox" aria-expanded="false" aria-controls="autocomplete-results" id="naics" class="autocomplete__input" required/>
 				                <button aria-label="toggle dropdown" class="autocomplete__dropdown-arrow">
@@ -121,11 +114,40 @@
 					</div>
 					<div class="row">
 						<div class="cell">
-							<input type="submit" value="Submit">
+							<button id="submit" name="submit">Submit</button>
 						</div>
 					</div>
 				</div>
 			</form>
+		</div>
+		<div id="results" name="results" class="results">
+			<h3 id="results-heading-possible" class="possible">Reporting may be required for this establishment.</h3>
+			<h3 id="results-heading-exempt" class="exempt">Reporting is NOT required for this establishment.</h3>
+			<h3 id="results-heading-required" class="required">Reporting is required for this establishment.</h3>
+			<ul class="results_ul">
+				<li id="possible-exempt" class="results__list">Based on your entry for state, please contact your state occupational safety and health agency for information about your reporting requirements. See <a href="https://www.osha.gov/stateplans">https://www.osha.gov/stateplans</a> for contact information.</li>
+
+				<li id="fed-exempt" class="results__list">As a Federal Government Agency, do NOT submit your injury and illness data through the Injury Tracking Application (see the <a href="https://www.osha.gov/sites/default/files/federal_injury_illness_recordkeeping_brochure.pdf">OSHA Federal Agency Recordkeeping/Reporting Modernization brochure</a>).</li>
+
+				<li id="state-govt-exempt" class="results__list">As a state or local government establishment in SS your are NOT required to submit your injury and illness data through the Injury Tracking Application.</li>
+
+				<li id="state-exempt" class="results__list">Based on your entry for state, you are NOT required to submit your injury and illness data through the Injury Tracking Application.</li>
+
+				<li id="rk-exempt" class="results__list naics__exempt">Based on your entry for NAICS code, you are partially exempt from OSHA's injury and illness recordkeeping requirements and are NOT required to submit your injury and illness data through the Injury Tracking Application. See <a href="https://www.osha.gov/recordkeeping/presentations/exempttable">https://www.osha.gov/recordkeeping/presentations/exempttable</a> for more information.</li>	
+
+				<li id="naics-exempt" class="results__list naics__exempt">Based on your entry for NAICS code, you are NOT required to submit your injury and illness data through the Injury Tracking Application. See <a href="https://www.osha.gov/recordkeeping/naics-codes-electronic-submission">https://www.osha.gov/recordkeeping/naics-codes-electronic-submission</a> for more information.</li>
+
+				<li id="employment-exempt" class="results__list naics__exempt">Based on your entry for NAICS code and peak establishment employment, you are NOT required to submit your injury and illness data through the Injury Tracking Application. Only establishments with 20 or more employees are required to report their injury and illness data through the ITA.</li>
+
+				<li id="reporting-required" class="required">Based on your entries, you are required to report your Form 300A summary data to OSHA through the Injury Tracking Application.</li>
+
+				<ul class="results_ul">
+					<li id="results-state" class="possible required">State = SS</li>
+					<li id="results-employment" class="required">Peak establishment employment = EEEE</li>
+					<li id="results-naics" class="required naics__exempt">NAICS code = NNNN</li>
+				</ul>
+			</ul>
+			<button id="reset" name="reset">Reset</button>
 		</div>
 	</body>
 </html>

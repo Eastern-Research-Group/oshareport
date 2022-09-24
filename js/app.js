@@ -9,52 +9,14 @@ const dropdownArrow = document.querySelector(".autocomplete__dropdown-arrow");
 const comboBox = document.querySelector(".autocomplete__container");
 
 let currentListItemFocused = -1;
-
-// naicsArray = naicsCodes.NAICS;
 let selectedNAICS = "";
-
-// const naicsArray = [
-//   {
-//       "NAICSCode": "111110",
-//       "NAICSTitle": "Soybean Farming",
-//   },
-//   {
-//       "NAICSCode": "111120",
-//       "NAICSTitle": "Oilseed (except Soybean) Farming",
-//   },
-//   {
-//       "NAICSCode": "111130",
-//       "NAICSTitle": "Dry Pea and Bean Farming",
-//   },
-//   {
-//       "NAICSCode": "111140",
-//       "NAICSTitle": "Wheat Farming",
-//   },
-//   {
-//       "NAICSCode": "111150",
-//       "NAICSTitle": "Corn Farming",
-//   },
-//   {
-//       "NAICSCode": "111160",
-//       "NAICSTitle": "Rice Farming",
-//   },
-//   {
-//       "NAICSCode": "111191",
-//       "NAICSTitle": "Oilseed and Grain Combination Farming",
-//   },
-//   {
-//       "NAICSCode": "111199",
-//       "NAICSTitle": "All Other Grain Farming",
-//   },
-//   {
-//       "NAICSCode": "111211",
-//       "NAICSTitle": "Potato Farming",
-//   }
-// ];
-
 let filteredResults = [...naicsCodes.NAICS];
-
 let isDropDownOpen = false;
+
+window.onload = function() { 
+	// document.querySelector("#data-entry").style.display = "block";
+	document.querySelector("#results").style.display = "none";
+}
 
 function openDropdown() {
   isDropDownOpen = true;
@@ -84,7 +46,6 @@ function outsideClickListener(event) {
 }
 
 document.addEventListener("click", outsideClickListener);
-
 input.addEventListener("click", openDropdown);
 
 dropdownArrow.addEventListener("click", (event) => {
@@ -136,7 +97,7 @@ function handleKeyboardEvents(event) {
   const listItems = resultsList.childNodes;
   let itemToFocus = null;
 
-  // Prevent defaitt if needed
+  // Prevent default if needed
   if (["ArrowUp", "ArrowDown", "Enter"].includes(event.key)) {
     event.preventDefault();
   }
@@ -223,7 +184,6 @@ function filter(value) {
 
 input.addEventListener("input", (event) => {
   const value = event.target.value;
-
   debounce(() => {
     filter(value);
     if (!isDropDownOpen) {
@@ -231,89 +191,6 @@ input.addEventListener("input", (event) => {
     }
   });
 });
-
-const form = document.querySelector("#form1");
-
-form.addEventListener("submit", function (event) {
-	// stop form submission
-	event.preventDefault();
-
-	// find any exemptions
-	let exemptions = getExemptions();
-
-	// update the HTML page
-	document.querySelector("#content").innerHTML = getResults(exemptions);
-});
-
-const EMPLOYMENT_EXEMPT_MSG = "<li>Based on your entry for NAICS code and peak establishment employment, you are NOT required to submit your injury and illness data through the Injury Tracking Application. Only establishments with ZZ or more employees are required to report their injury and illness data through the ITA.</li><ul><li>NAICS code = XXXX YYYY</li><li>State = SS</li></ul>";
-const NAICS_RK_EXEMPT_MSG = "<li>Based on your entry for NAICS code, you are partially exempt from OSHA's injury and illness recordkeeping requirements and are NOT required to submit your injury and illness data through the Injury Tracking Application. See <a href=\"https://www.osha.gov/recordkeeping/presentations/exempttable\">https://www.osha.gov/recordkeeping/presentations/exempttable</a> for more information.</li><ul><li>NAICS code = XXXX YYYY</li></ul>";
-const NAICS_EXEMPT_MSG = "<li>Based on your entry for NAICS code, you are NOT required to submit your injury and illness data through the Injury Tracking Application. See <a href=\"https://www.osha.gov/recordkeeping/naics-codes-electronic-submission\">https://www.osha.gov/recordkeeping/naics-codes-electronic-submission</a> for more information.</li><ul><li>NAICS code = XXXX YYYY</li></ul>";
-const FED_EXEMPT_MSG = "<li>As a Federal Government Agency, do NOT submit your injury and illness data through the Injury Tracking Application (see the <a href=\"https://www.osha.gov/sites/default/files/federal_injury_illness_recordkeeping_brochure.pdf\">OSHA Federal Agency Recordkeeping/Reporting Modernization brochure</a>).</li>";
-const STATE_GOVT_EXEMPT_MSG = "<li>As a state or local government establishment in SS your are NOT required to submit your injury and illness data through the Injury Tracking Application.</li>"
-const STATE_EXEMPT_MSG = "<li>Based on your entry for state, you are NOT required to submit your injury and illness data through the Injury Tracking Application.</li><ul><li>State = SS</li></ul>"
-const STATE_POSSIBLE_EXEMPT_MSG = "<li>Based on your entry for state, please contact your state occupational safety and health agency for information about your reporting requirements. See <a href=\"https://www.osha.gov/stateplans\">https://www.osha.gov/stateplans</a> for contact information.</li><ul><li>State = SS</li></ul>"
-
-function getSpecialExemption(state, government) {
-	const exemptPrivStates = ["AK", "WA", "OR", "CA", "NV", "HI", "WY", "UT", "AZ", "NM", "MN", "IA", "MI", "IN", "KY", "TN", "VT", "MD", "VA", "NC", "SC", "PR"];
-	if (exemptPrivStates.includes(state) && (government == "nongovernment" || government == "statelocal")) {
-		return STATE_POSSIBLE_EXEMPT_MSG.replace("SS", getStateName(state));
-	}	
-	return false;
-}
-
-function getGovernmentExemption(state, government) {
-	if (government == 'federal') {
-		return FED_EXEMPT_MSG;
-	}
-	const exemptStates = ["IL", "ME", "NY", "MA", "CT", "NJ", "VI"];
-	if (exemptStates.includes(state)) {
-		if (government == "statelocal") {
-			return STATE_POSSIBLE_EXEMPT_MSG.replace("SS", getStateName(state));
-		} else {
-			return STATE_EXEMPT_MSG.replace("SS", getStateName(state));
-		}
-	}
-	return false;
-}
-
-function getNaicsExemption(naicsInfo) {
-	if (naicsInfo.RKExempt == "TRUE") {
-		return NAICS_RK_EXEMPT_MSG.replace("XXXX", naicsInfo.NAICSCode).replace("YYYY", naicsInfo.NAICSTitle);
-	} else if (naicsInfo.NotOSHAJurisdiction == "TRUE") {
-		return NAICS_EXEMPT_MSG.replace("XXXX", naicsInfo.NAICSCode).replace("YYYY", naicsInfo.NAICSTitle);
-	}
-	return false;
-}
-
-function getEmploymentExemption(employment, state, naicsInfo) {
-	if (naicsInfo.Employees20 == "TRUE" && employment < 20) {
-		return EMPLOYMENT_EXEMPT_MSG.replace("ZZ", "20").replace("XXXX", naicsInfo.NAICSCode).replace("YYYY", naicsInfo.NAICSTitle).replace("SS", getStateName(state));
-	} else if (naicsInfo.Employees250 == "TRUE" && employment < 250) {
-		return EMPLOYMENT_EXEMPT_MSG.replace("ZZ", "250").replace("XXXX", naicsInfo.NAICSCode).replace("YYYY", naicsInfo.NAICSTitle).replace("SS", getStateName(state));
-	}
-	return false;
-}
-
-function getExemptions() {
-	console.log(`state = ${document.querySelector("#state").value}`);
-	console.log(`employment = ${document.querySelector("#employment").value}`);
-	console.log(`government = ${document.querySelector('input[name=government]:checked').value}`);	
-	console.log(`naics = ${selectedNAICS}`);
-
-	let naicsInfo = getNaicsInfo(selectedNAICS);
-	// console.log(naicsInfo);
-
-	let specialExempt = getSpecialExemption(document.querySelector("#state").value, document.querySelector('input[name=government]:checked').value);
-	let governmentExempt = getGovernmentExemption(document.querySelector("#state").value, document.querySelector("#state").value);
-	let naicsExempt = getNaicsExemption(naicsInfo);
-	let employmentExempt = getEmploymentExemption(document.querySelector("#employment").value, document.querySelector("#state").value, naicsInfo);
-
-	return {"specialExempt": specialExempt,
-			"governmentExempt": governmentExempt,
-			"naicsExempt": naicsExempt,
-			"employmentExempt": employmentExempt
-			}
-}
 
 function getStateName(statecode) {
 	let obj = states;
@@ -327,46 +204,96 @@ function getNaicsInfo(naics) {
 	return result[0];
 }
 
-function getCommaNumber(number) {
-	return Number(number).toLocaleString();
-}
+document.querySelector("#reset").addEventListener("click", function() {
+	location.reload();
+});
 
-function getResults(exemptions) {
-	let stateName = getStateName(document.querySelector("#state").value);
-	let naicsTitle = selectedNAICS + " " + getNaicsInfo(selectedNAICS).NAICSTitle;
-	let employmentNum = getCommaNumber(document.querySelector("#employment").value);
+document.querySelector("#form1").addEventListener("submit", function (event) {
+	//don't submit the form
+	event.preventDefault()
 
-	let isExempt = false;
-	let heading = "Reporting is required for this establishment.";
-	let divContent = ""
-	
-	if (exemptions.specialExempt) {
-		heading = "Reporting may be required for this establishment."
-		divContent = divContent + exemptions.specialExempt;
-		isExempt = true;
+	const state = document.querySelector("#state").value;
+	const employment = document.querySelector("#employment").value;
+	const government = document.querySelector('input[name=government]:checked').value;
+	const naicsInfo = getNaicsInfo(selectedNAICS);
+
+	console.log(`state = ${state}`);
+	console.log(`employment = ${employment}`);
+	console.log(`government = ${government}`);	
+	console.log(`naics = ${selectedNAICS}`);
+
+	const exemptPrivStates = ["AK", "WA", "OR", "CA", "NV", "HI", "WY", "UT", "AZ", "NM", "MN", "IA", "MI", "IN", "KY", "TN", "VT", "MD", "VA", "NC", "SC", "PR"];
+	const exemptStates = ["IL", "ME", "NY", "MA", "CT", "NJ", "VI"];
+
+	let resultsStyle = "required";
+
+	if (government == 'federal') {
+		resultsStyle = "exempt";
+		document.querySelector("#fed-exempt").style.display = "block";
+		console.log(1);
+	} else if (exemptPrivStates.includes(state) && (government == "nongovernment" || government == "statelocal")) {
+		resultsStyle = "possible";
+		document.querySelector('#possible-exempt').style.display = "block";
+		console.log(2);
+	} else if (exemptStates.includes(state)) {
+		console.log(4);
+		if (government == "statelocal") {
+			resultsStyle = "possible";
+			document.querySelector("#possible-exempt").style.display = "block";
+			console.log(5);
+		}
 	} else {
-		if (exemptions.governmentExempt) {
-			divContent = divContent + exemptions.governmentExempt;
-			isExempt = true;
-		}		
-		if (exemptions.naicsExempt) {
-			divContent = divContent + exemptions.naicsExempt;
-			isExempt = true;
+		if (naicsInfo.RKExempt == "TRUE") {
+			resultsStyle = "exempt";
+			document.querySelector("#rk-exempt").style.display = "block";
+			document.querySelector("#naics__exempt").style.display = "block";
+			console.log(6);
+		} else if (naicsInfo.NotOSHAJurisdiction == "TRUE") {
+			resultsStyle = "exempt";
+			document.querySelector("#naics-exempt").style.display = "block";
+			document.querySelector("#naics__exempt").style.display = "block";
+			console.log(7);
 		}
-		if (exemptions.employmentExempt) {
-			divContent = divContent + exemptions.employmentExempt;
-			isExempt = true;
-		}
-		if (isExempt === true) {
-			heading = "No reporting is required for this establishment.";
+		if (naicsInfo.Employees20 == "TRUE" && employment < 20) {
+			resultsStyle = "exempt";
+			document.querySelector("#employment-exempt").style.display = "block";
+			console.log(8);
+		} else if (naicsInfo.Employees250 == "TRUE" && employment < 250) {
+			resultsStyle = "exempt";
+			document.querySelector("#employment-exempt").innerHTML = 
+				document.querySelector("#employment-exempt").innerHTML.replace("20", "250");
+			document.querySelector("#employment-exempt").style.display = "block";
+			document.querySelector("#naics__exempt").style.display = "block";
+			console.log(9);
 		}
 	}
-	if (isExempt === false) {
-		divContent = divContent + "Based on your entries, you are required to report your Form 300A summary data to OSHA through the Injury Tracking Application.";
-		divContent = divContent + "<ul><li>State = " + stateName + "</li>";
-		divContent = divContent + "<li>Peak establishment employment = " + employmentNum + "</li>";
-		divContent = divContent + "<li>NAICS code = " + naicsTitle + "</li>";
-	}
-	divContent = "<h3>" + heading + "</h3><ul>" + divContent + "</ul>";
-	return divContent
-}
+
+	console.log(`resultsStyle = ${resultsStyle}`);
+	console.log(10);
+
+	let elList = document.querySelectorAll("." + resultsStyle);
+	elList.forEach(el => el.style.display = "block");
+
+	document.querySelector("#results-state").innerHTML = 
+		document.querySelector("#results-state").innerHTML.replace("SS", getStateName(state)); 
+	document.querySelector("#results-employment").innerHTML = 
+		document.querySelector("#results-employment").innerHTML
+			.replace("EEEE", Number(employment).toLocaleString());
+	document.querySelector("#results-naics").innerHTML = 
+		document.querySelector("#results-naics").innerHTML
+			.replace("NNNN", naicsInfo["NAICSCode"] + ": " + naicsInfo["NAICSTitle"]); 
+
+	document.querySelector("#data-entry").style.display = "none";		
+	document.querySelector("#results").style.display = "block";
+
+	console.log(11);
+});
+
+
+
+
+
+
+
+
+
