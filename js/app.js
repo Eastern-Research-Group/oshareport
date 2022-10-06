@@ -238,6 +238,10 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
 			resultsStyle = "possible";
 			document.querySelector("#possible-exempt").style.display = "list-item";
 		}
+	} else if (government == "statelocal") { // if we get here, it's a state/local government in a state without a state plan
+		resultsStyle = "exempt";
+		document.querySelector("#state-govt-exempt").style.display = "list-item";
+		document.querySelector("#results-state").style.display = "list-item";
 	} else {
 		if (naicsInfo.RKExempt == "TRUE") {
 			resultsStyle = "exempt";
@@ -274,6 +278,7 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
 		document.querySelector("#results-naics").innerHTML
 			.replace("NNNN", naicsInfo["NAICSCode"] + ": " + naicsInfo["NAICSTitle"]); 
 
+	document.querySelector("#intro").style.display = "none";	
 	document.querySelector("#data-entry").style.display = "none";		
 	document.querySelector("#results").style.display = "block";
 });
