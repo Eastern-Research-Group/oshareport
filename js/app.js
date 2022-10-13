@@ -252,11 +252,14 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
 		if (naicsInfo.Employees20 == "TRUE" && employment < 20) {
 			resultsStyle = "exempt";
 			document.querySelector("#employment-exempt").style.display = "list-item";
+      document.querySelector("#results-employment").style.display = "list-item";
 		} else if (naicsInfo.Employees250 == "TRUE" && employment < 250) {
 			resultsStyle = "exempt";
 			document.querySelector("#employment-exempt").innerHTML = 
 				document.querySelector("#employment-exempt").innerHTML.replace("20", "250");
 			document.querySelector("#employment-exempt").style.display = "list-item";
+      document.querySelector("#results-naics").style.display = "list-item";
+      document.querySelector("#results-employment").style.display = "list-item";
 		}
 	}
 
