@@ -231,11 +231,9 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
 	} else if (exemptPrivStates.includes(state) && (government == "nongovernment" || government == "statelocal")) {
 		resultsStyle = "possible";
 		document.querySelector('#possible-exempt').style.display = "list-item";
-	} else if (exemptStates.includes(state)) {
-		if (government == "statelocal") {
-			resultsStyle = "possible";
-			document.querySelector("#possible-exempt").style.display = "list-item";
-		}
+	} else if (exemptStates.includes(state) && (government == "statelocal")) {
+		resultsStyle = "possible";
+		document.querySelector("#possible-exempt").style.display = "list-item";
 	} else if (government == "statelocal") { 
 		// if we get here, it's a state/local government in a state without a state plan, so don't report
 		resultsStyle = "exempt";
@@ -245,12 +243,11 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
 		if (naicsInfo.RKExempt == "TRUE") {
 			resultsStyle = "exempt";
 			document.querySelector("#rk-exempt").style.display = "list-item";
-			document.querySelector(".results_ul").style.display = "list-item";
-			document.querySelector(".naics__exempt").style.display = "list-item";
+      document.querySelector("#results-naics").style.display = "list-item";
 		} else if (naicsInfo.NotOSHAJurisdiction == "TRUE") {
 			resultsStyle = "exempt";
 			document.querySelector("#naics-exempt").style.display = "list-item";
-			document.querySelector(".naics__exempt").style.display = "list-item";
+      document.querySelector("#results-naics").style.display = "list-item";
 		}
 		if (naicsInfo.Employees20 == "TRUE" && employment < 20) {
 			resultsStyle = "exempt";
@@ -260,7 +257,6 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
 			document.querySelector("#employment-exempt").innerHTML = 
 				document.querySelector("#employment-exempt").innerHTML.replace("20", "250");
 			document.querySelector("#employment-exempt").style.display = "list-item";
-			document.querySelector(".naics__exempt").style.display = "list-item";
 		}
 	}
 
@@ -276,7 +272,7 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
 			.replace("EEEE", Number(employment).toLocaleString());
 	document.querySelector("#results-naics").innerHTML = 
 		document.querySelector("#results-naics").innerHTML
-			.replace("NNNN", naicsInfo["NAICSCode"] + ": " + naicsInfo["NAICSTitle"]); 
+			.replace("NNNN", naicsInfo.NAICSCode + ": " + naicsInfo.NAICSTitle); 
 
 	document.querySelector("#intro").style.display = "none";	
 	document.querySelector("#data-entry").style.display = "none";		
