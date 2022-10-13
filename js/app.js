@@ -264,7 +264,7 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
 		}
 	}
 
-	console.log(`resultsStyle = ${resultsStyle}`);
+	// console.log(`resultsStyle = ${resultsStyle}`);
 
 	let elList = document.querySelectorAll("." + resultsStyle);
 	elList.forEach(el => el.style.display = "list-item");
