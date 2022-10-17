@@ -224,58 +224,59 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
   const exemptStates = exempt.exemptStates
 
 	let resultsStyle = "required";
+  let governmentType = "Non-government";
 
 	if (government == 'federal') {
 		resultsStyle = "exempt";
+    governmentType = 'Federal'
 		document.querySelector("#fed-exempt").style.display = "list-item";
 	} else if (exemptPrivStates.includes(state) && (government == "nongovernment" || government == "statelocal")) {
 		resultsStyle = "possible";
+    if (government == "statelocal") {
+       governmentType = 'State or Local';
+    }
 		document.querySelector('#possible-exempt').style.display = "list-item";
 	} else if (exemptStates.includes(state) && (government == "statelocal")) {
 		resultsStyle = "possible";
+    governmentType = 'State or Local';
 		document.querySelector("#possible-exempt").style.display = "list-item";
 	} else if (government == "statelocal") { 
 		// if we get here, it's a state/local government in a state without a state plan, so don't report
 		resultsStyle = "exempt";
+    governmentType = 'State or Local';
 		document.querySelector("#state-govt-exempt").style.display = "list-item";
-		document.querySelector("#results-state").style.display = "list-item";
 	} else {
 		if (naicsInfo.RKExempt == "TRUE") {
 			resultsStyle = "exempt";
 			document.querySelector("#rk-exempt").style.display = "list-item";
-      document.querySelector("#results-naics").style.display = "list-item";
 		} else if (naicsInfo.NotOSHAJurisdiction == "TRUE") {
 			resultsStyle = "exempt";
 			document.querySelector("#naics-exempt").style.display = "list-item";
-      document.querySelector("#results-naics").style.display = "list-item";
 		}
 		if (naicsInfo.Employees20 == "TRUE" && employment < 20) {
 			resultsStyle = "exempt";
 			document.querySelector("#employment-exempt").style.display = "list-item";
-      document.querySelector("#results-employment").style.display = "list-item";
 		} else if (naicsInfo.Employees250 == "TRUE" && employment < 250) {
 			resultsStyle = "exempt";
-			document.querySelector("#employment-exempt").innerHTML = 
-				document.querySelector("#employment-exempt").innerHTML.replace("20", "250");
-			document.querySelector("#employment-exempt").style.display = "list-item";
-      document.querySelector("#results-naics").style.display = "list-item";
-      document.querySelector("#results-employment").style.display = "list-item";
+			document.querySelector("#employment250-exempt").style.display = "list-item";
 		}
 	}
-
 	// console.log(`resultsStyle = ${resultsStyle}`);
-
-	let elList = document.querySelectorAll("." + resultsStyle);
-	elList.forEach(el => el.style.display = "list-item");
 
 	document.querySelector("#results-state").innerHTML = 
 		document.querySelector("#results-state").innerHTML.replace("SS", getStateName(state)); 
 	document.querySelector("#results-employment").innerHTML = 
 		document.querySelector("#results-employment").innerHTML
 			.replace("EEEE", Number(employment).toLocaleString());
+  document.querySelector("#results-government").innerHTML = 
+    document.querySelector("#results-government").innerHTML.replace("GG", governmentType);      
 	document.querySelector("#results-naics").innerHTML = 
 		document.querySelector("#results-naics").innerHTML
 			.replace("NNNN", naicsInfo.NAICSCode + ": " + naicsInfo.NAICSTitle); 
+
+  document.querySelector(".results_ul").style.display = "list-item";  
+  let elList = document.querySelectorAll("." + resultsStyle);
+  elList.forEach(el => el.style.display = "list-item");
 
 	document.querySelector("#intro").style.display = "none";	
 	document.querySelector("#data-entry").style.display = "none";		
