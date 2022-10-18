@@ -95,7 +95,6 @@ function handleKeyboardEvents(event) {
   const listItems = resultsList.childNodes;
   let itemToFocus = null;
 
-  // Prevent default if needed
   if (["ArrowUp", "ArrowDown", "Enter"].includes(event.key)) {
     event.preventDefault();
   }
@@ -148,9 +147,7 @@ function handleKeyboardEvents(event) {
       break;
     default:
       if (event.target !== input) {
-        if (/([a-zA-Z0-9_]|ArrowLeft|ArrowRight)/.test(event.key)) {
-          // If list item is focused and user presses an alphanumeric key, or left or right
-          // Focus on the input instead
+        if (/(\w|ArrowLeft|ArrowRight)/.test(event.key)) {
           input.focus();
         }
       }
@@ -207,19 +204,12 @@ document.querySelector("#reset").addEventListener("click", function() {
 });
 
 document.querySelector("#form1").addEventListener("submit", function (event) {
-	//don't submit the form
 	event.preventDefault()
 
 	const state = document.querySelector("#state").value;
 	const employment = document.querySelector("#employment").value;
 	const government = document.querySelector('input[name=government]:checked').value;
 	const naicsInfo = getNaicsInfo(selectedNAICS);
-
-	// console.log(`state = ${state}`);
-	// console.log(`employment = ${employment}`);
-	// console.log(`government = ${government}`);	
-	// console.log(`naics = ${selectedNAICS}`);
-
   const exemptPrivStates = exempt.exemptPrivStates
   const exemptStates = exempt.exemptStates
 
@@ -241,7 +231,6 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
     governmentType = 'State or Local';
 		document.querySelector("#possible-exempt").style.display = "list-item";
 	} else if (government == "statelocal") { 
-		// if we get here, it's a state/local government in a state without a state plan, so don't report
 		resultsStyle = "exempt";
     governmentType = 'State or Local';
 		document.querySelector("#state-govt-exempt").style.display = "list-item";
@@ -261,7 +250,6 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
 			document.querySelector("#employment250-exempt").style.display = "list-item";
 		}
 	}
-	// console.log(`resultsStyle = ${resultsStyle}`);
 
 	document.querySelector("#results-state").innerHTML = 
 		document.querySelector("#results-state").innerHTML.replace("SS", getStateName(state)); 
