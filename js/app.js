@@ -268,8 +268,8 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
   const employment = document.querySelector("#employment").value;
   const government = document.querySelector('input[name=government]:checked').value;
   const naicsInfo = getNaicsInfo(selectedNAICS);
-  const exemptPrivStates = exempt.exemptPrivStates
-  const exemptStates = exempt.exemptStates
+  const exemptPrivStates = exempt.exemptPrivStates;
+  const exemptStates = exempt.exemptStates;
 
   let resultsStyle = "required";
   let governmentType = "Non-government";
