@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>OSHA ITA Applicability</title>
+        <link href="./styles/styles.css" rel="stylesheet" />
+	</head>
+	<body>
+		<h2>OSHA ITA Applicability</h2>
+		<div id="intro">
+			Covered establishments must electronically submit their OSHA 300A data by March 2 of the year following the covered year of the data (e.g., For submission of calendar year 2022 data that is March 2, 2023).  Not all establishment need to submit OSHA 300A data to OSHA. To determine if your establishment is required to submit 300A data to OSHA, please complete the following selections. All selections are required.
+			<p>
+			More information on the reporting requirements and process is available at: <a href="https://www.osha.gov/injuryreporting" target="_blank">https://www.osha.gov/injuryreporting</a>
+		</div>
+		<hr />
+		<br>
+		<div id="data-entry">
+			<form id="form1" name="form1" action="index.html" method="post" autocomplete="off">
+				<div class="table">
+					<div class="row">
+						<div class="cell">
+							<label for="state">State</label>
+						</div>
+						<div class="cell">
+							<select id="state" name="state" required>
+								<option value="" selected>Select a state</option>
+								<option value="AL">Alabama</option>
+								<option value="AK">Alaska</option>
+								<option value="AS">American Samoa</option>
+								<option value="AZ">Arizona</option>
+								<option value="AR">Arkansas</option>
+								<option value="CA">California</option>
+								<option value="CO">Colorado</option>
+								<option value="CT">Connecticut</option>
+								<option value="DE">Delaware</option>
+								<option value="DC">District Of Columbia</option>
+								<option value="FL">Florida</option>
+								<option value="GA">Georgia</option>
+								<option value="GU">Guam</option>
+								<option value="HI">Hawaii</option>
+								<option value="ID">Idaho</option>
+								<option value="IL">Illinois</option>
+								<option value="IN">Indiana</option>
+								<option value="IA">Iowa</option>
+								<option value="KS">Kansas</option>
+								<option value="KY">Kentucky</option>
+								<option value="LA">Louisiana</option>
+								<option value="ME">Maine</option>
+								<option value="MD">Maryland</option>
+								<option value="MA">Massachusetts</option>
+								<option value="MI">Michigan</option>
+								<option value="MN">Minnesota</option>
+								<option value="MS">Mississippi</option>
+								<option value="MO">Missouri</option>
+								<option value="MT">Montana</option>
+								<option value="NE">Nebraska</option>
+								<option value="NV">Nevada</option>
+								<option value="NH">New Hampshire</option>
+								<option value="NJ">New Jersey</option>
+								<option value="NM">New Mexico</option>
+								<option value="NY">New York</option>
+								<option value="NC">North Carolina</option>
+								<option value="ND">North Dakota</option>
+								<option value="MP">Northern Mariana Islands</option>
+								<option value="OH">Ohio</option>
+								<option value="OK">Oklahoma</option>
+								<option value="OR">Oregon</option>
+								<option value="PA">Pennsylvania</option>
+								<option value="PR">Puerto Rico</option>
+								<option value="RI">Rhode Island</option>
+								<option value="SC">South Carolina</option>
+								<option value="SD">South Dakota</option>
+								<option value="TN">Tennessee</option>
+								<option value="TX">Texas</option>
+								<option value="UT">Utah</option>
+								<option value="VT">Vermont</option>
+								<option value="VI">Virgin Islands</option>
+								<option value="VA">Virginia</option>
+								<option value="WA">Washington</option>
+								<option value="WV">West Virginia</option>
+								<option value="WI">Wisconsin</option>
+								<option value="WY">Wyoming</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="cell">
+							<label for="employment">Peak employment from previous year</label>
+						</div>
+						<div class="cell">	
+							<input id="employment" name="employment" required>
+						</div>
+					</div>		
+					<div class="row">
+						<div class="cell">
+							<label for="government">Is the establishment a government facility?</label>
+						</div>
+						<div class="cell">
+							<input type="radio" id="nongovernment" name="government" value="nongovernment" required><label for="nongovernment">No</label>
+							<input type="radio" id="federal" name="government" value="federal" required><label for="federal">Yes, Federal Government</label>
+							<input type="radio" id="statelocal" name="government" value="statelocal" required><label for="statelocal">Yes, State or Local Government</label>
+						</div>
+					</div>
+ 					
+
+					<div class="row">
+						<div class="cell">
+							<label for="naics">NAICS Code</label>
+						</div>
+						<div class="cell">
+							<input list="naics-datalist" id="naics-input" name="naics-input" required> 
+							<datalist id="naics-datalist">
+								<option value="">Start typing a code or keyword to search...</option>
+							</datalist>
+						</div>
+					</div>	
+
+
+ 					<div class="row">
+						<div class="cell">
+							<button id="submit" name="submit">Submit</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div id="results" name="results" class="results">
+			<h3 id="results-heading-possible" class="possible">Reporting may be required for this establishment.</h3>
+			<h3 id="results-heading-exempt" class="exempt">Reporting is NOT required for this establishment.</h3>
+			<h3 id="results-heading-required" class="required">Reporting is required for this establishment.</h3>
+			<ul class="results_ul">
+				<li id="possible-exempt" class="results__list">Based on your entry for state, please contact your state occupational safety and health agency for information about your reporting requirements. See <a href="https://www.osha.gov/stateplans" target="_blank">https://www.osha.gov/stateplans</a> for contact information.</li>
+
+				<li id="fed-exempt" class="results__list">As a Federal Government Agency, do NOT submit your injury and illness data through the Injury Tracking Application (see the <a href="https://www.osha.gov/sites/default/files/federal_injury_illness_recordkeeping_brochure.pdf" target="_blank">OSHA Federal Agency Recordkeeping/Reporting Modernization brochure</a>).</li>
+
+				<li id="state-govt-exempt" class="results__list">Based on your entry for state, as a state or local government establishment you are NOT required to submit your injury and illness data through the Injury Tracking Application.</li>
+
+				<li id="state-exempt" class="results__list">Based on your entry for state, you are NOT required to submit your injury and illness data through the Injury Tracking Application.</li>
+
+				<li id="rk-exempt" class="results__list naics__exempt">Based on your entry for NAICS code, you are partially exempt from OSHA's injury and illness recordkeeping requirements and are NOT required to submit your injury and illness data through the Injury Tracking Application. See <a href="https://www.osha.gov/recordkeeping/presentations/exempttable" target="_blank">https://www.osha.gov/recordkeeping/presentations/exempttable</a> for more information.</li>	
+
+				<li id="naics-exempt" class="results__list naics__exempt">Based on your entry for NAICS code, you are NOT required to submit your injury and illness data through the Injury Tracking Application. See <a href="https://www.osha.gov/recordkeeping/naics-codes-electronic-submission" target="_blank">https://www.osha.gov/recordkeeping/naics-codes-electronic-submission</a> for more information.</li>
+
+				<li id="employment-exempt" class="results__list naics__exempt">Based on your entry for NAICS code and peak establishment employment, you are NOT required to submit your injury and illness data through the Injury Tracking Application. Only establishments with 20 or more employees are required to report their injury and illness data through the ITA.</li>
+
+				<li id="employment250-exempt" class="results__list naics__exempt">Based on your entry for NAICS code and peak establishment employment, you are NOT required to submit your injury and illness data through the Injury Tracking Application. In your industry, only establishments with 250 or more employees are required to report their injury and illness data through the ITA.</li>
+
+
+				<li id="reporting-required" class="required">Based on your entries, you are required to report your Form 300A summary data to OSHA through the <a href="https://www.osha.gov/injuryreporting" target="_blank">Injury Tracking Application</a>.</li>
+
+				<ul id="results-ul" class="results_ul">
+					<li id="results-state" class="results_ul">State = SS</li>
+					<li id="results-employment" class="results_ul">Peak establishment employment = EEEE</li>
+					<li id="results-government" class="results_ul">Government = GG</li>
+					<li id="results-naics" class="results_ul">NAICS code = NNNN</li>
+				</ul>
+
+			</ul>
+			<button id="reset" name="reset">Reset</button>
+		</div>
+		<script src="./js/app2.js" type="text/javascript"></script>
+	</body>
+</html>
