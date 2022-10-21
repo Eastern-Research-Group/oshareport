@@ -87,10 +87,10 @@
 						<div class="cell">
 							<label for="employment">Peak employment from previous year</label>
 						</div>
-						<div class="cell">	
-							<input id="employment" name="employment" required>
+						<div class="cell">
+							<input type="number" id="employment" name="employment" min=1 max=1000000 required>
 						</div>
-					</div>		
+					</div>
 					<div class="row">
 						<div class="cell">
 							Is the establishment a government facility?
@@ -107,7 +107,7 @@
 						</div>
 						<div class="cell">
 							<div class="autocomplete__container" role="combobox" aria-labelledby="naics">
-				                <input role="textbox" aria-expanded="false" aria-controls="autocomplete-results" id="naics" class="autocomplete__input" placeholder="Start typing a code or keyword to search..." alt="Start typing a code or keyword to search..." required/>
+				               <input role="textbox" aria-expanded="false" aria-controls="autocomplete-results" id="naics" class="autocomplete__input" placeholder="Start typing a code or keyword to search..." alt="Start typing a code or keyword to search..." required/>
 				                <button aria-label="toggle dropdown" class="autocomplete__dropdown-arrow">
 				                    <svg width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
 				                        <title>Open drop down</title>
