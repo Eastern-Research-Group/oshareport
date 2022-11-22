@@ -5252,17 +5252,17 @@
             "NAICSCode": "448310",
             "NAICSTitle": "Jewelry Stores",
             "NotOSHAJurisdiction": "FALSE",
-            "RKExempt": "FALSE",
+            "RKExempt": "TRUE",
             "Employees20": "FALSE",
-            "Employees250": "TRUE"
+            "Employees250": "FALSE"
         },
         {
             "NAICSCode": "448320",
             "NAICSTitle": "Luggage and Leather Goods Stores",
             "NotOSHAJurisdiction": "FALSE",
-            "RKExempt": "FALSE",
+            "RKExempt": "TRUE",
             "Employees20": "FALSE",
-            "Employees250": "TRUE"
+            "Employees250": "FALSE"
         },
         {
             "NAICSCode": "449110",
@@ -6460,7 +6460,7 @@
             "NAICSCode": "515210",
             "NAICSTitle": "Cable and Other Subscription Programming",
             "NotOSHAJurisdiction": "FALSE",
-            "RKExempt": "TRUE",
+            "RKExempt": "FALSE",
             "Employees20": "TRUE",
             "Employees250": "FALSE"
         },
@@ -6492,17 +6492,17 @@
             "NAICSCode": "517110",
             "NAICSTitle": "Wired Telecommunications Carriers",
             "NotOSHAJurisdiction": "FALSE",
-            "RKExempt": "TRUE",
+            "RKExempt": "FALSE",
             "Employees20": "FALSE",
-            "Employees250": "FALSE"
+            "Employees250": "TRUE"
         },
         {
             "NAICSCode": "517111",
             "NAICSTitle": "Wired Telecommunications Carriers",
             "NotOSHAJurisdiction": "FALSE",
             "RKExempt": "FALSE",
-            "Employees20": "TRUE",
-            "Employees250": "FALSE"
+            "Employees20": "FALSE",
+            "Employees250": "TRUE"
         },
         {
             "NAICSCode": "517112",
