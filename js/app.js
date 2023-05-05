@@ -265,11 +265,14 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
   event.preventDefault()
 
   const state = document.querySelector("#state").value;
+  const firm11 = document.querySelector('input[name=firm11]:checked').value;
   const employment = document.querySelector("#employment").value;
   const government = document.querySelector('input[name=government]:checked').value;
   const naicsInfo = getNaicsInfo(selectedNAICS);
   const exemptPrivStates = exempt.exemptPrivStates;
   const exemptStates = exempt.exemptStates;
+
+  console.log(naicsInfo);
 
   let resultsStyle = "required";
   let governmentType = "Non-government";
@@ -278,7 +281,12 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
     resultsStyle = "exempt";
     governmentType = 'Federal'
     document.querySelector("#fed-exempt").style.display = "list-item";
-  } else if (exemptPrivStates.includes(state) && (government == "nongovernment" || government == "statelocal")) {
+  } 
+  // else if (firm11 == 'firm11yes') {
+  //   resultsStyle = "exempt";
+  //   document.querySelector("#firm11-exempt").style.display = "list-item";
+  // } 
+  else if (exemptPrivStates.includes(state) && (government == "nongovernment" || government == "statelocal")) {
     resultsStyle = "possible";
     if (government == "statelocal") {
        governmentType = 'State or Local';
@@ -293,6 +301,10 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
     governmentType = 'State or Local';
     document.querySelector("#state-govt-exempt").style.display = "list-item";
   } else {
+    if (naicsInfo."Form300/301" == "TRUE" and firm11 == "Yes") {
+      resultsStyle = "exempt";
+      document.querySelector("#firm11-exempt").style.display = "list-item";
+    }
     if (naicsInfo.RKExempt == "TRUE") {
       resultsStyle = "exempt";
       document.querySelector("#rk-exempt").style.display = "list-item";
@@ -311,11 +323,17 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
 
   document.querySelector("#results-state").innerHTML = 
     document.querySelector("#results-state").innerHTML.replace("SS", getStateName(state)); 
+
+  document.querySelector("#results-firm11").innerHTML = 
+    document.querySelector("#results-firm11").innerHTML.replace("FF", firm11); 
+  
   document.querySelector("#results-employment").innerHTML = 
     document.querySelector("#results-employment").innerHTML
       .replace("EEEE", Number(employment).toLocaleString());
+  
   document.querySelector("#results-government").innerHTML = 
     document.querySelector("#results-government").innerHTML.replace("GG", governmentType);      
+  
   document.querySelector("#results-naics").innerHTML = 
     document.querySelector("#results-naics").innerHTML
       .replace("NNNN", naicsInfo.NAICSCode + ": " + naicsInfo.NAICSTitle); 

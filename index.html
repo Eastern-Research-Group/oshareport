@@ -84,11 +84,11 @@
 					</div>
 					<div class="row">
 						<div class="cell">
-							<label for="form300">Did your firm have 11 or more employees during the previous year?</label>
+							<label for="firm11">Did your firm have 11 or more employees during the previous year?</label>
 						</div>
 						<div class="cell">
-							<input type="radio" id="form300no" name="form300" value="form300no" required><label for="form300no">No</label>
-							<input type="radio" id="form300yes" name="form300" value="form300yes" required><label for="form300yes">Yes</label>
+							<input type="radio" id="firm11no" name="firm11" value="firm11no" required><label for="firm11no">No</label>
+							<input type="radio" id="firm11yes" name="firm11" value="firm11yes" required><label for="firm11yes">Yes</label>
 						</div>
 					</div>
 					<div class="row">
@@ -139,6 +139,10 @@
 			<h3 id="results-heading-exempt" class="exempt">Reporting is NOT required for this establishment.</h3>
 			<h3 id="results-heading-required" class="required">Reporting is required for this establishment.</h3>
 			<ul class="results_ul">
+				<li id="firm11-exempt" class="results__list">Based on your entry for Firm size, you are partially exempt from OSHA's injury and illness recordkeeping requirements and are NOT required to keep OSHA injury and illness records unless the Bureau of Labor Statistics informs you in writing that you must participate in their survey of occupational injuries and illnesses. 
+
+				<p>You are NOT required to submit your injury and illness data through the OSHA Injury Tracking Application.  However, as required by § 1904.39, all employers covered by the OSH Act must report to OSHA any work-related incident that results in a fatality, the in-patient hospitalization of one or more employees, an employee amputation, or an employee loss of an eye.</li>
+
 				<li id="possible-exempt" class="results__list">Based on your entry for state, please contact your state occupational safety and health agency for information about your reporting requirements. See <a href="https://www.osha.gov/stateplans" target="_blank">https://www.osha.gov/stateplans</a> for contact information.</li>
 
 				<li id="fed-exempt" class="results__list">As a Federal Government Agency, do NOT submit your injury and illness data through the Injury Tracking Application (see the <a href="https://www.osha.gov/sites/default/files/federal_injury_illness_recordkeeping_brochure.pdf" target="_blank">OSHA Federal Agency Recordkeeping/Reporting Modernization brochure</a>).</li>
@@ -160,6 +164,7 @@
 
 				<ul id="results-ul" class="results_ul">
 					<li id="results-state" class="results_ul">State = SS</li>
+					<li id="results-firm11" class="results_ul">Firm has 11 or more employees = FF</li>
 					<li id="results-employment" class="results_ul">Peak establishment employment = EEEE</li>
 					<li id="results-government" class="results_ul">Government = GG</li>
 					<li id="results-naics" class="results_ul">NAICS code = NNNN</li>

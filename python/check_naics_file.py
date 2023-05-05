@@ -18,7 +18,7 @@ def load_file():
 	             'RK Exempt': 'RKExempt',
 	             '20+ employees must report': 'Employees20',
 	             'Only 250+ employees must report': 'Employees250',
-	             '300/301 data': 'Form300/301'}
+	             '300/301 data': 'Form300_301'}
 	df.rename(columns=col_names, inplace=True)
 	return df
 
