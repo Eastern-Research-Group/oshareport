@@ -272,8 +272,6 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
   const exemptPrivStates = exempt.exemptPrivStates;
   const exemptStates = exempt.exemptStates;
 
-  console.log(naicsInfo);
-
   let resultsStyle = "required";
   let governmentType = "Non-government";
 
@@ -301,7 +299,7 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
     governmentType = 'State or Local';
     document.querySelector("#state-govt-exempt").style.display = "list-item";
   } else {
-    if (naicsInfo."Form300/301" == "TRUE" and firm11 == "Yes") {
+    if (naicsInfo.Form300_301 == "TRUE" && firm11 == "No") {
       resultsStyle = "exempt";
       document.querySelector("#firm11-exempt").style.display = "list-item";
     }
