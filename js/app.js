@@ -280,10 +280,10 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
     governmentType = 'Federal'
     document.querySelector("#fed-exempt").style.display = "list-item";
   } 
-  // else if (firm11 == 'firm11yes') {
-  //   resultsStyle = "exempt";
-  //   document.querySelector("#firm11-exempt").style.display = "list-item";
-  // } 
+  else if (firm11 == 'No') {
+    resultsStyle = "exempt";
+    document.querySelector("#firm11-exempt").style.display = "list-item";
+  } 
   else if (exemptPrivStates.includes(state) && (government == "nongovernment" || government == "statelocal")) {
     resultsStyle = "possible";
     if (government == "statelocal") {
@@ -299,23 +299,25 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
     governmentType = 'State or Local';
     document.querySelector("#state-govt-exempt").style.display = "list-item";
   } else {
-    if (naicsInfo.Form300_301 == "TRUE" && firm11 == "No") {
-      resultsStyle = "exempt";
-      document.querySelector("#firm11-exempt").style.display = "list-item";
-    }
-    if (naicsInfo.RKExempt == "TRUE") {
-      resultsStyle = "exempt";
-      document.querySelector("#rk-exempt").style.display = "list-item";
-    } else if (naicsInfo.NotOSHAJurisdiction == "TRUE") {
-      resultsStyle = "exempt";
-      document.querySelector("#naics-exempt").style.display = "list-item";
-    }
-    if (naicsInfo.Employees20 == "TRUE" && employment < 20) {
-      resultsStyle = "exempt";
-      document.querySelector("#employment-exempt").style.display = "list-item";
-    } else if (naicsInfo.Employees250 == "TRUE" && employment < 250) {
-      resultsStyle = "exempt";
-      document.querySelector("#employment250-exempt").style.display = "list-item";
+    if (naicsInfo.Form300_301 == "TRUE" && employment >= 100) {
+      resultsStyle = "required__forms";
+      document.querySelector("#forms-required").style.display = "list-item";
+      document.querySelector("#reporting-required").style.display = "none";
+    } else {
+      if (naicsInfo.RKExempt == "TRUE") {
+        resultsStyle = "exempt";
+        document.querySelector("#rk-exempt").style.display = "list-item";
+      } else if (naicsInfo.NotOSHAJurisdiction == "TRUE") {
+        resultsStyle = "exempt";
+        document.querySelector("#naics-exempt").style.display = "list-item";
+      }
+      if (naicsInfo.Employees20 == "TRUE" && employment < 20) {
+        resultsStyle = "exempt";
+        document.querySelector("#employment-exempt").style.display = "list-item";
+      } else if (naicsInfo.Employees250 == "TRUE" && employment < 250) {
+        resultsStyle = "exempt";
+        document.querySelector("#employment250-exempt").style.display = "list-item";
+      }
     }
   }
 
