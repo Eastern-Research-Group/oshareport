@@ -272,6 +272,11 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
   const exemptPrivStates = exempt.exemptPrivStates;
   const exemptStates = exempt.exemptStates;
 
+  if (firm11 == 'No' && employment >= 11) {
+    alert('Peak establishment employment can not be smaller than firm size');
+    return false;
+  }
+
   let resultsStyle = "required";
   let governmentType = "Non-government";
 
