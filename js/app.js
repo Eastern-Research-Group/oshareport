@@ -281,9 +281,11 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
   let governmentType = "Non-government";
 
   if (government == 'federal') {
-    resultsStyle = "exempt";
     governmentType = 'Federal'
-    document.querySelector("#fed-exempt").style.display = "list-item";
+    if (naicsInfo.NAICSCode != '491110') { 
+      resultsStyle = "exempt";
+      document.querySelector("#fed-exempt").style.display = "list-item";
+    }
   } 
   else if (firm11 == 'No') {
     resultsStyle = "exempt";
