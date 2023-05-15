@@ -285,6 +285,10 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
     if (naicsInfo.NAICSCode != '491110') { 
       resultsStyle = "exempt";
       document.querySelector("#fed-exempt").style.display = "list-item";
+    } else if (naicsInfo.NAICSCode == '491110' && naicsInfo.Form300_301 == "TRUE" && employment >= 100) {
+      resultsStyle = "required__forms";
+      document.querySelector("#forms-required").style.display = "list-item";
+      document.querySelector("#reporting-required").style.display = "none";
     }
   } 
   else if (firm11 == 'No') {
