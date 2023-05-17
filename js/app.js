@@ -272,15 +272,6 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
   const exemptPrivStates = exempt.exemptPrivStates;
   const exemptStates = exempt.exemptStates;
 
-  console.log('government = ' + government);
-  console.log('naicsInfo.NAICSCode = ' + naicsInfo.NAICSCode);
-
-
-  if (naicsInfo.NAICSCode == '491110' && government != 'federal') {
-    alert('NAICS Code 491110 (Postal Service) must be Federal government.')
-    return false;
-  }
-
   if (firm11 == 'No' && employment >= 11) {
     alert('Peak establishment employment cannot be larger than Firm size.');
     return false;
