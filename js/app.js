@@ -280,16 +280,26 @@ document.querySelector("#form1").addEventListener("submit", function (event) {
   let resultsStyle = "required";
   let governmentType = "Non-government";
 
-  if (government == 'federal') {
-    governmentType = 'Federal'
-    if (naicsInfo.NAICSCode != '491110') { 
-      resultsStyle = "exempt";
-      document.querySelector("#fed-exempt").style.display = "list-item";
-    } else if (naicsInfo.NAICSCode == '491110' && naicsInfo.Form300_301 == "TRUE" && employment >= 100) {
+  if (naicsInfo.NAICSCode == '491110') {
+    if (government == 'federal') {
+      governmentType = 'Federal';
+    } else if (government == 'statelocal') {
+      governmentType = 'State or Local';
+    }
+    if (employment >= 100) {
       resultsStyle = "required__forms";
       document.querySelector("#forms-required").style.display = "list-item";
-      document.querySelector("#reporting-required").style.display = "none";
+      document.querySelector("#reporting-required").style.display = "none";      
+    } else if (employment > 20) {
+      document.querySelector("#forms-required").style.display = "none";
+      document.querySelector("#reporting-required").style.display = "list-item";            
+    } else {
+      resultsStyle = "exempt";
     }
+  } else if (government == 'federal') {
+    governmentType = 'Federal'
+    resultsStyle = "exempt";
+    document.querySelector("#fed-exempt").style.display = "list-item";
   } else if (exemptPrivStates.includes(state) && (government == "nongovernment" || government == "statelocal")) {
     resultsStyle = "possible";
     if (government == "statelocal") {
