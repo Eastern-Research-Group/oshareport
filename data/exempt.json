@@ -1,6 +1,7 @@
 {
     "exemptPrivStates":  
-        ["AK", "AZ", "CA", "HI", "IA", "IN", "KY", "MD", "MI", "MN", "NC", "NM", "NV", "OR", "PR", "SC", "TN", "UT", "VA", "VT", "WA", "WY"],
+            ["MN", "OR"],
      "exemptStates":
-        ["CT", "IL", "MA", "ME", "NJ", "NY", "VI"]   
+     ["AK", "AZ", "CA", "HI", "IA", "IN", "KY", "MD", "MI","NC", "NM", "NV", "CT", 
+     "IL","MA", "ME", "NJ", "NY", "VI", "PR", "SC", "TN", "UT", "VA", "VT", "WA", "WY"]
 }
